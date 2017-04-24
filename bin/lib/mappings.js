@@ -114,6 +114,36 @@ module.exports = {
 			},
 			// need a different handling for ios and android
 			// IsSecure
+	    password: {
+	        ios: "PSTextFieldSpecifier",
+	        android: "EditTextPreference",
+	        types: "string",
+	        required: ["key"],
+	        attrs: {
+	            keyboard: {
+	                android: "@android:inputType",
+	                ios: "KeyboardType",
+	                value: {
+	                    // Alphabet , NumbersAndPunctuation , NumberPad , URL , EmailAddress
+	                    // text, number, textUri, textEmailAddress
+	                    // ios: https://developer.apple.com/library/ios/documentation/PreferenceSettings/Conceptual/SettingsApplicationSchemaReference/Articles/PSTextFieldSpecifier.html#//apple_ref/doc/uid/TP40007011-SW1
+	                    // android is little weird http://developer.android.com/reference/android/widget/TextView.html#attr_android:inputType
+	                    number: {ios: "NumberPad", android: "number"},
+	                    text: {ios: "Alphabet", android: "text"},
+	                    uri: {ios: "URL", android: "textUri"},
+	                    email: {ios: "EmailAddress", android: "textEmailAddress"}
+	                }
+	            },
+	            password: {
+	                android: "@android:password",
+	                ios: "IsSecure",
+	                value: {true: {ios: "true", android: "true"}}
+	            },
+	            key:     commonMappings.key,
+	            title:   commonMappings.title,
+	            default: commonMappings.default,
+	        }
+	    },
 			// AutocapitalizationType
 			// AutocorrectionType
 			key:     commonMappings.key,
